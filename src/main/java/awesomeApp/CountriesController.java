@@ -19,7 +19,7 @@ public class CountriesController {
     private ApplicationContext appContext = new ClassPathXmlApplicationContext("App.xml");
     XMLCountries converter = (XMLCountries) appContext.getBean("XMLCountries");
     
-    private Countries country = getCountries();
+    private Countries countries = getCountries();
     
     private Countries getCountries(){
     	try{
@@ -31,14 +31,13 @@ public class CountriesController {
     	}
     }
     		
-    //private static Countries countries = (Countries) ApplicationContext.getBean("countries");
     
     @RequestMapping("/countries")
-    public @ResponseBody Object countries(
+    public @ResponseBody Object Country(
             @RequestParam(value="name", required=false, defaultValue="World") String name) {
     	System.out.println("==== in greeting ====");
  //
     	//return null;
-        return this.country;
+        return this.countries.getCountries();
     }
 }
