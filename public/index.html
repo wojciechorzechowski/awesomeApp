@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="ContractorCalcExample">
+	<head>
+		<title>KALKULATOR</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"></script>
+    	<script src="js/controllers.js"></script>
+	</head>
+
+	<body ng-controller="getSettings">
+		<div>
+		<p> PRZELICZNIK KONTRAKTORA </p>
+		<P>Aplikacja ma za zadanie wyliczyć miesięczny zarobek netto w PLN <br/>
+		na kontrakcie w Niemczech, Wielkiej Brytanii i Polsce.
+		<p> 1.Wybierz kraj</p>
+		<form name="myForm">
+  <label ng-repeat="country in countries">
+    <input type="radio" name="countrySelection" ng-model="formData.selected" ng-value="country">
+ 	   {{country.countryName}}
+ 	   <br/>
+  </label>
+  <input type="number" name="input" ng-model="hourPrice"
+           min="0" max="99"> {{formData.selected.countryCurrency}}
+  
+ </form>
+ <p>Choosen:{{countrySelected}} </p>
+		<p> 2.Wpisz stawkę dzienną
+		
+		
+			<p>The ID is {{countries[0]}}</p>
+			<p>The content is {{greeting.content}}</p>
+		</div>
+	</body>
+</html>
