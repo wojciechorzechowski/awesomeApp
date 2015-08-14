@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="XMLCountries" class="awesomeApp.XMLCountries">
+		<property name="marshaller" ref="castorMarshaller" />
+		<property name="unmarshaller" ref="castorMarshaller" />
+		<constructor-arg value="d:\countries.xml"/>
+	</bean>
+	
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="targetClasses">
+		<list>
+			<value>awesomeApp.Countries</value>
+			<value>awesomeApp.Country</value>
+		</list>
+		</property> 
+	</bean>
+
+   <bean id="countries" class="awesomeApp.Countries">
+   </bean>
+
+   <!-- Definition for spellChecker bean -->
+   <bean id="country" class="awesomeApp.Country">
+   </bean>
+
+</beans>
+
