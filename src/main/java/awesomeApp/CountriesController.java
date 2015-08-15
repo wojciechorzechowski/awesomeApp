@@ -19,14 +19,12 @@ public class CountriesController {
     private ApplicationContext appContext = new ClassPathXmlApplicationContext("App.xml");
     XMLCountries converter = (XMLCountries) appContext.getBean("XMLCountries");
     
-    private Countries countries = getCountries();
-    
     private Countries getCountries(){
     	try{
     		return(Countries) converter.convertFromXMLToObject();
     	}
     	catch (Exception e) {
-    		System.out.println("==== fuck====");
+    		System.out.println("Unable to convert xml contents to Countries");
     		return null;
     	}
     }
@@ -35,9 +33,7 @@ public class CountriesController {
     @RequestMapping("/countries")
     public @ResponseBody Object Country(
             @RequestParam(value="name", required=false, defaultValue="World") String name) {
-    	System.out.println("==== in greeting ====");
- //
-    	//return null;
-        return this.countries.getCountries();
+    	
+        return this.getCountries().getCountries();
     }
 }

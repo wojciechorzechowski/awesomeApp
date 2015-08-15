@@ -1,34 +1,53 @@
 <!doctype html>
 <html ng-app="ContractorCalcExample">
-	<head>
-		<title>KALKULATOR</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"></script>
-    	<script src="js/controllers.js"> </script>
-	</head>
+<head>
+<title>KALKULATOR</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"
+	type="text/javascript"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"
+	type="text/javascript"></script>
+<script src="js/controllers.js" type="text/javascript">
+</script>
+<script src="http://demos.amitavroy.com/learningci/assets/js/xml2json.js"></script>
+</head>
 
-	<body ng-controller="getSettings">
+<body ng-controller="getSettings">
+	<div>
+		<p>PRZELICZNIK KONTRAKTORA</p>
+		<p>
+			Aplikacja ma za zadanie wyliczyć miesięczny zarobek netto w PLN <br />
+			na kontrakcie w Niemczech, Wielkiej Brytanii i Polsce.
+		</p>
+		<form name="myForm" action="">
 		<div>
-		<p> PRZELICZNIK KONTRAKTORA </p>
-		<P>Aplikacja ma za zadanie wyliczyć miesięczny zarobek netto w PLN <br/>
-		na kontrakcie w Niemczech, Wielkiej Brytanii i Polsce.
-		<p> 1.Wybierz kraj</p>
-		<form name="myForm">
-  <label ng-repeat="country in countries">
-    <input type="radio" name="countrySelection" ng-model="formData.selected" ng-value="country">
- 	   {{country.countryName}}
- 	   <br/>
-  </label>
-  <input type="number" name="input" ng-model="hourPrice"
-           min="0" max="99"> {{formData.selected.countryCurrency}}
-  
- </form>
- <p>Choosen:{{countrySelected}} </p>
-		<p> 2.Wpisz stawkę dzienną
+		<p>1.Wybierz kraj</p>
 		
-		
-			<p>The ID is {{countries[0]}}</p>
-			<p>The content is {{greeting.content}}</p>
+			<label ng-repeat="country in countries"> <input type="radio"
+				name="countrySelection" ng-model="formData.selected"
+				ng-value="country" ng-change="setCountry()")> {{country.countryName}} <br />
+			</label> 
+			<p>2.Wpisz stawkę dzienną</p>
+			<input type="currency" name="input" ng-model="formData.hourPrice" ng-change="calculateResult()"> {{formData.selected.countryCurrency}}
 		</div>
-	</body>
+		
+		<div>
+		<table>
+		<tr><td>WYNIK</td><tr/>
+		<tr><td>Stawka miesięczna netto</td><tr/>
+		<tr><td>{{result.monthNet}} PLN</td><tr/>
+		<tr>
+		<td>Podatek Dochodowy ({{formData.selected.tax}})</td>
+		<td>Koszt stały</td>
+		<tr/>
+		<tr>
+		<td>{{result.tax}} PLN</td>
+		<td>{{result.fixedCost}} PLN</td>
+		<tr/>
+		</table>
+		</div>
+		</form>
+	</div>
+</body>
 </html>

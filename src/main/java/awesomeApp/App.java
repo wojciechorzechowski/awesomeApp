@@ -14,7 +14,7 @@ import awesomeApp.Countries;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
+//@Configuration
 @ComponentScan
 @EnableAutoConfiguration
 public class App {
