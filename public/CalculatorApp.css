@@ -21,3 +21,7 @@ body{
 li{
 	font-weight: bold;
 }
+
+table{
+	width="100%";
+}

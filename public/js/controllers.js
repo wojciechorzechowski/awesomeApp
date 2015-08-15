@@ -14,6 +14,8 @@ ContractorCalcExample.factory('CurrencyRatesSource', [
 							function(data, status) {
 								// send the converted data back
 								// to the callback function
+								//console.log("type of data:"+typeof data)
+								//console.log(data);
 								callback(x2js.xml_str2json(data));
 							})
 				}
@@ -48,45 +50,53 @@ ContractorCalcExample
 
 							$scope.calculateResult = function() {
 								console.log("asasdadasd");
-								rate = getCurrencyRate($scope.selectedCountry.countryCurrency); 
+								rate = $scope.currencyRate; 
+								console.log("typeof= "+typeof $scope.currencyRate);
+								//console.log($scope.currencyRate);
+								console.log("rnd");
 								$scope.result.monthNet = 22 * $scope.formData.hourPrice*rate;
+								$scope.result.monthNet.toFixed(2);
+								console.log("l"+$scope.result.monthNet);
 								$scope.result.fixedCost = $scope.selectedCountry.fixedCost*rate;
-								$scope.result.tax = rate * $scope.selectedCountry.tax
+								$scope.result.tax = $scope.selectedCountry.tax
 										* $scope.result.monthNet / 100;
 							};
 
 							$scope.setCountry = function() {
-								$scope.selectedCountry = $scope.formData.selected;
-								for (country in $scope.countries)
+								console.log("in set Country"+$scope.countries);
+								for (var number in $scope.countries)
 									{
+										country = $scope.countries[number];
 										if (country.id == $scope.formData.selected){
-											console.log("set Country success");
 											$scope.selectedCountry = country;
 										}
 									};
-								//$scope.currencyRate = getCurrencyRate($scope.selectedCountry.countryCurrency);
+								$scope.currencyRate = getCurrencyRate($scope.selectedCountry.countryCurrency);
+								$scope.calculateResult();
 							};
 
 							getCurrencyRate = function(currency) {
-								console.log("bla"+currency);
-								//$scope.currencyRates.tabela_kursow
-								//<pozycja>
-								//<nazwa_waluty>bat (Tajlandia)</nazwa_waluty>
-								//<przelicznik>1</przelicznik>
-								//<kod_waluty>THB</kod_waluty>
-								console.log($scope.currencyRates);
-								for (var pozycja in $scope.currencyRates.tabela_korsow.pozycja) {
-									console.log("in");
-									if (pozycja.kod_waluty == currency) {
-										console.log(pozycja.kurs_sredni);
-										return pozycja.kurs_sredni;
+								console.log("in getCurrencyRate");
+								if (typeof $scope.currencyRates === 'undefined') {
+								    return 1;
+								}
+								
+								table =$scope.currencyRates.tabela_kursow.pozycja_asArray;
+								
+								for (var number in table) {
+									if (table[number].kod_waluty == currency) {
+										return Number(table[number].kurs_sredni.replace(',','.'));
 									}
 								}
 								
+								return 1;
+								
 							};
 
-							$scope.hourPrice = 0;
+							
 							$scope.formData = {};
+							$scope.formData.selected=0;
+							$scope.formData.hourPrice = 0;
 							
 							setCurrencyRates = function(data) {
 								$scope.currencyRates = data;
@@ -95,6 +105,7 @@ ContractorCalcExample
 
 							setCountries = function(data) {
 								$scope.countries = data;
+								$scope.setCountry();
 							}
 							CountriesSource.get(setCountries);
 
