@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+#topdiv {
+    background-color: white;
+}
+
+#bottomdiv {
+    background-color: #F2F2F2;
+    text-align: center;
+}
+
+body{
+	background-color: #E4E4E4;
+	display:table-cell;
+	vertical-align:middle;
+	position: absolute; 
+  	left: 30%; 
+  	width: 40%;
+  	margin: auto;
+}
+
+li{
+	font-weight: bold;
+}

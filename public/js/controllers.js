@@ -48,25 +48,41 @@ ContractorCalcExample
 
 							$scope.calculateResult = function() {
 								console.log("asasdadasd");
-								$scope.result.monthNet = 22 * $scope.formData.hourPrice;
-								$scope.result.fixedCost = $scope.selectedCountry.fixedCost;
-								$scope.result.tax = $scope.selectedCountry.tax
+								rate = getCurrencyRate($scope.selectedCountry.countryCurrency); 
+								$scope.result.monthNet = 22 * $scope.formData.hourPrice*rate;
+								$scope.result.fixedCost = $scope.selectedCountry.fixedCost*rate;
+								$scope.result.tax = rate * $scope.selectedCountry.tax
 										* $scope.result.monthNet / 100;
 							};
 
 							$scope.setCountry = function() {
 								$scope.selectedCountry = $scope.formData.selected;
-								$scope.currencyRate = getCurrencyRate($scope.selectedCountry.countryCurrency);
+								for (country in $scope.countries)
+									{
+										if (country.id == $scope.formData.selected){
+											console.log("set Country success");
+											$scope.selectedCountry = country;
+										}
+									};
+								//$scope.currencyRate = getCurrencyRate($scope.selectedCountry.countryCurrency);
 							};
 
-							getCurrencyRate = function(bla) {
+							getCurrencyRate = function(currency) {
+								console.log("bla"+currency);
 								//$scope.currencyRates.tabela_kursow
 								//<pozycja>
 								//<nazwa_waluty>bat (Tajlandia)</nazwa_waluty>
 								//<przelicznik>1</przelicznik>
 								//<kod_waluty>THB</kod_waluty>
-								console.log($scope.currencyRates('tabelakorsow/pozycja/:kod_waluty/privileges', {kod_waluty: '@id'});
-								$scope.currencyRates.tabela_kursow);
+								console.log($scope.currencyRates);
+								for (var pozycja in $scope.currencyRates.tabela_korsow.pozycja) {
+									console.log("in");
+									if (pozycja.kod_waluty == currency) {
+										console.log(pozycja.kurs_sredni);
+										return pozycja.kurs_sredni;
+									}
+								}
+								
 							};
 
 							$scope.hourPrice = 0;
