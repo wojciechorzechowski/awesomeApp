@@ -2,7 +2,7 @@
 <html ng-app="ContractorCalcExample">
 <head>
 <title>KALKULATOR</title>
-<link rel="stylesheet" type="text/css" href="CalculatorApp.css">
+<link rel="stylesheet" type="text/css" href="css/CalculatorApp.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"
 	type="text/javascript"></script>
@@ -16,7 +16,7 @@
 	src="http://demos.amitavroy.com/learningci/assets/js/xml2json.js"></script>
 </head>
 
-<body ng-controller="getSettings">
+<body ng-controller="AppController">
 	<div>
 		<h1>PRZELICZNIK KONTRAKTORA</h1>
 		<p>Aplikacja ma za zadanie wyliczyć miesięczny zarobek netto w PLN
@@ -34,8 +34,7 @@
 					</label>
 					<li>Wpisz stawkę dzienną</li>
 					<input type="currency" name="input" ng-model="formData.hourPrice"
-						ng-change="calculateResult()">
-					{{selectedCountry.currency}}
+						ng-change="calculate()"><b>{{selectedCountry.currency}}</b>
 					<br />
 				</ol>
 			</div>
@@ -53,7 +52,7 @@
 				<td colspan="2">{{result.monthNet}} PLN</td>
 			<tr />
 			<tr>
-				<td>Podatek Dochodowy ({{formData.selected.tax}})</td>
+				<td>Podatek Dochodowy ({{selectedCountry.tax}})</td>
 				<td>Koszt stały</td>
 			<tr />
 			<tr>
