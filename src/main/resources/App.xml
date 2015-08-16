@@ -5,10 +5,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="XMLCountries" class="awesomeApp.XMLCountries">
+	<bean id="CountriesProvider" class="awesomeApp.XMLCountriesProvider">
 		<property name="marshaller" ref="castorMarshaller" />
 		<property name="unmarshaller" ref="castorMarshaller" />
-		<constructor-arg value="d:\countries.xml"/>
+		<constructor-arg value="countries.xml"/>
 	</bean>
 	
 	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">

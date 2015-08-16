@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<countries>
+<country>
+<fixed-cost>800</fixed-cost> 
+<tax>20</tax>
+<id>0</id>
+<currency-code>EUR</currency-code>
+<currency>EURO</currency>
+<name>Niemcy</name>
+</country>
+<country>
+<fixed-cost>600</fixed-cost> 
+<tax>25</tax>
+<id>1</id>
+<currency-code>GBP</currency-code>
+<currency>GBP</currency>
+<name>Anglia</name>
+</country>
+<country>
+<fixed-cost>1200</fixed-cost> 
+<tax>19</tax>
+<id>2</id>
+<currency-code>PLN</currency-code>
+<currency>PLN</currency>
+<name>Polska</name>
+</country>
+</countries>
