@@ -32,9 +32,9 @@ public class CountriesController {
 	@RequestMapping("/countries")
 	public @ResponseBody Object Object() {
 		if (log.isInfoEnabled()) {
-
+			log.info("New request for " + this.getClass().getName());
 		}
-		log.info("New request for " + this.getClass().getName());
+		//TODO:remove id from country, id should be set here, or while creation, to have it unique 
 		return this.getCountries().getCountriesArray();
 	}
 }
