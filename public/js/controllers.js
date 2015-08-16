@@ -78,7 +78,8 @@ ContractorCalcExample.factory('Calculations', [ function() {
 	
 	return {
 		calculate: function(callback, hourPrice, rate, country){
-			
+			if (typeof hourPrice === 'undefined'){
+				hourPrice=0;};
 			result.monthNet = daysInMonth * hourPrice * rate;
 			result.fixedCost = country.fixedCost * rate;
 			result.tax = country.tax * result.monthNet / 100;
@@ -123,8 +124,10 @@ ContractorCalcExample
 							//launches calculation with callback : setResults
 							//I feel that there is a better way to do it
 							$scope.calculate = function(){
+								rate = 0;
+								if (typeof $scope.selectedCountry !=='undefined')
+									{rate = getCurrencyRate($scope.selectedCountry.currencyCode);};
 								
-								rate = getCurrencyRate($scope.selectedCountry.currencyCode);
 								return Calculations.calculate(setResult, $scope.formData.hourPrice, rate, 
 										$scope.selectedCountry);
 							}
@@ -170,8 +173,8 @@ ContractorCalcExample
 							
 							//linked to form in template
 							$scope.formData = {
-									selected : 0,
-									hourPrice : 0
+									selected : 0//,
+									//hourPrice
 							};
 							
 							//getting currency rates

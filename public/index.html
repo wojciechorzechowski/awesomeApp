@@ -19,45 +19,42 @@
 <body ng-controller="AppController">
 	<div>
 		<h1>PRZELICZNIK KONTRAKTORA</h1>
-		<p>Aplikacja ma za zadanie wyliczyć miesięczny zarobek netto w PLN
+		<p class ="smallestFont">Aplikacja ma za zadanie wyliczyć miesięczny zarobek netto w PLN
 			na kontrakcie w Niemczech, Wielkiej Brytanii i Polsce.</p>
 		<form name="myForm" action="">
-			<div id="topdiv">
+			<div class="topdiv">
 				<ol>
-					<li>Wybierz kraj</li>
+					<li class="boldText">Wybierz kraj</li>
+					<p>
+						<label ng-repeat="country in countries"> <input
+							type="radio" name="countrySelection" ng-model="formData.selected"
+							ng-value="country.id" ng-change="setCountry()")>
+							{{country.name}} <br />
+						</label>
+					</p>
+					<li class="boldText">Wpisz stawkę dzienną</li>
+					<p>
+						<input type="currency" name="input" ng-model="formData.hourPrice"
+							ng-change="calculate()" placeholder="kwota netto"><span class="boldText">{{selectedCountry.currency}}</span>
+					</p>
 
-					<label ng-repeat="country in countries"> 
-					<input
-						type="radio" name="countrySelection" ng-model="formData.selected"
-						ng-value="country.id" ng-change="setCountry()")>
-						{{country.name}} <br />
-					</label>
-					<li>Wpisz stawkę dzienną</li>
-					<input type="currency" name="input" ng-model="formData.hourPrice"
-						ng-change="calculate()"><b>{{selectedCountry.currency}}</b>
-					<br />
 				</ol>
 			</div>
 		</form>
 	</div>
-	<div id="bottomdiv">
+	<div class="bottomdiv">
+		<p>
+			<span class="wynik boldText">WYNIK</span><br /> <span
+				class="netMonthText">Stawka miesięczna netto</span><br /> <span
+				class="netMonth boldText">{{result.monthNet}} PLN</span>
+		</p>
 		<table>
 			<tr>
-				<td colspan="2"><h1>WYNIK</h1></td>
-			<tr />
-			<tr>
-				<td colspan="2">Stawka miesięczna netto</td>
-			<tr />
-			<tr>
-				<td colspan="2">{{result.monthNet}} PLN</td>
-			<tr />
-			<tr>
-				<td>Podatek Dochodowy ({{selectedCountry.tax}})</td>
-				<td>Koszt stały</td>
-			<tr />
-			<tr>
-				<td>{{result.tax}} PLN</td>
-				<td>{{result.fixedCost}} PLN</td>
+				<td>Podatek Dochodowy ({{selectedCountry.tax}}%)<br /> <span
+					class="bootomResults boldText">{{result.tax}} PLN</span>
+				</td>
+				<td>Koszt stały <br /> <span class="bootomResults boldText">{{result.fixedCost}}
+						PLN</span></td>
 			<tr />
 		</table>
 	</div>
