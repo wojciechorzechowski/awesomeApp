@@ -71,7 +71,7 @@ ContractorCalcExample
 											$scope.selectedCountry = country;
 										}
 									};
-								$scope.currencyRate = getCurrencyRate($scope.selectedCountry.countryCurrency);
+								$scope.currencyRate = getCurrencyRate($scope.selectedCountry.currencyCode);
 								$scope.calculateResult();
 							};
 
